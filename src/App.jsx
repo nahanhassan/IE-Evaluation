@@ -1,7 +1,16 @@
 import React, { useState } from "react";
 import "./index.css";
 
-const namesList = ["Imran"];
+const namesList = [
+  "Emon: Cutting",
+  "Khorshed: U-1",
+  "Mashum: U-1",
+  "Ahsan: U-2",
+  "Murad: U-3",
+  "Mahfuz: U-3",
+  "Imran: U-4",
+  "Sajeed: U-4",
+];
 
 const initialRow = {
   capacity: "",
