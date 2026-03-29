@@ -145,7 +145,7 @@ export default function EvaluationApp() {
                       onChange={(e) => handleChange(i, field, e.target.value)}
                       style={{ background: getColor(row[field]) }}
                     >
-                      <option value="">Select</option>
+                      <option value="">--</option>
                       {[0, 1, 2, 3, 4, 5].map((num) => (
                         <option key={num} value={num}>
                           {num}
