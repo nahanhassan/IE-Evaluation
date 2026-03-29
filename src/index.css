@@ -6,35 +6,44 @@
   font-family: 'Segoe UI', sans-serif;
 }
 
-/* Background */
+/* Body & Background */
 body {
-  background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+  background: linear-gradient(135deg, #e0f7fa, #f9fbe7);
   min-height: 100vh;
+  color: #333;
 }
 
 /* Container */
 .container {
-  padding: 30px;
+  padding: 20px;
 }
 
 /* Glass Card */
 .card {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(15px);
-  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
   padding: 25px;
   max-width: 1200px;
   margin: auto;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
   animation: fadeIn 0.6s ease-in-out;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
 }
 
 /* Title */
 h2 {
   text-align: center;
-  color: #333;
-  margin-bottom: 10px;
+  color: #222;
+  margin-bottom: 15px;
   letter-spacing: 1px;
+  font-size: 26px;
+  font-weight: 600;
 }
 
 /* Table */
@@ -42,37 +51,42 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+  min-width: 900px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
   overflow: hidden;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.8);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.05);
 }
 
 /* Header */
 th {
-  background: rgba(240,240,240,0.8);
-  color: #333;
-  padding: 12px;
-  font-weight: 500;
+  background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+  color: #222;
+  padding: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 0.5px;
 }
 
 /* Cells */
 td {
-  padding: 10px;
+  padding: 12px;
   text-align: center;
-  color: #333;
   border-bottom: 1px solid rgba(0,0,0,0.05);
+  font-size: 13px;
+  transition: background 0.3s ease;
 }
 
 /* Row Hover */
 tr:hover {
-  background: rgba(200,200,200,0.3);
-  transition: 0.3s;
+  background: rgba(161,196,253,0.2);
 }
 
 /* Select Dropdown */
 select {
   padding: 6px;
-  border-radius: 6px;
+  border-radius: 8px;
   border: 1px solid #ccc;
   outline: none;
   font-weight: bold;
@@ -82,6 +96,14 @@ select {
   color: #333;
 }
 
+/* Rating colors (light professional pastels) */
+select option[value="0"] { background-color: #ffe5e5; color: #333; }
+select option[value="1"] { background-color: #fff0e5; color: #333; }
+select option[value="2"] { background-color: #fff7e6; color: #333; }
+select option[value="3"] { background-color: #ffffea; color: #333; }
+select option[value="4"] { background-color: #e6ffe6; color: #333; }
+select option[value="5"] { background-color: #ccffcc; color: #333; }
+
 select:hover {
   transform: scale(1.05);
 }
@@ -89,34 +111,37 @@ select:hover {
 /* Button */
 .btn {
   margin-top: 25px;
-  padding: 12px 30px;
+  padding: 12px 32px;
   border: none;
   border-radius: 30px;
-  background: linear-gradient(135deg, #6dd5fa, #2980b9);
+  background: linear-gradient(135deg, #42a5f5, #478ed1);
   color: white;
   font-size: 16px;
   cursor: pointer;
-  transition: 0.3s;
-  box-shadow: 0 0 15px rgba(41,128,185,0.5);
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(66,165,245,0.4);
 }
 
-/* Button Hover */
 .btn:hover {
   transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 0 25px rgba(41,128,185,0.8);
+  box-shadow: 0 8px 20px rgba(66,165,245,0.6);
 }
 
 /* Thank You Modal */
 .thankyou {
   text-align: center;
-  padding: 60px;
-  color: #333;
+  padding: 60px 30px;
+  color: #222;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
   animation: popUp 0.6s ease;
 }
 
 .thankyou h3 {
   font-size: 28px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  color: #42a5f5;
 }
 
 .thankyou p {
@@ -131,7 +156,7 @@ select:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.2);
+  background: rgba(0,0,0,0.25);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -146,29 +171,55 @@ select:hover {
 
 /* Fade-in animation */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* Pop-up animation */
 @keyframes popUp {
-  from {
-    transform: scale(0.7);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+  from { transform: scale(0.7); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
 /* Modal fade-out state */
 .modal-overlay.fade-out .thankyou {
   animation: fadeOut 0.5s ease forwards;
+}
+
+/* ================= Mobile Responsiveness ================= */
+@media (max-width: 768px) {
+  .card {
+    padding: 15px;
+  }
+
+  table {
+    min-width: 600px;
+    font-size: 12px;
+  }
+
+  th, td {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  .btn {
+    padding: 10px 22px;
+    font-size: 14px;
+  }
+
+  .thankyou {
+    padding: 40px 20px;
+  }
+
+  .thankyou h3 {
+    font-size: 24px;
+  }
+
+  .thankyou p {
+    font-size: 16px;
+  }
 }

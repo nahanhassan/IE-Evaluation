@@ -23,9 +23,10 @@ const initialRow = {
 
 export default function EvaluationApp() {
   const [rows, setRows] = useState(
-    namesList.map((name) => ({ name, ...initialRow })),
+    namesList.map((name) => ({ name, ...initialRow }))
   );
   const [submitted, setSubmitted] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   const handleChange = (index, field, value) => {
     const updated = [...rows];
@@ -40,9 +41,7 @@ export default function EvaluationApp() {
   };
 
   const getAverage = (row) => {
-    const values = Object.values(row)
-      .slice(1)
-      .filter((v) => v !== "");
+    const values = Object.values(row).slice(1).filter((v) => v !== "");
     if (!values.length) return 0;
     const sum = values.reduce((a, b) => a + parseInt(b), 0);
     return (sum / values.length).toFixed(2);
@@ -69,21 +68,19 @@ export default function EvaluationApp() {
 
   const validateForm = () => {
     return rows.every((row) =>
-      Object.values(row)
-        .slice(1)
-        .every((val) => val !== ""),
+      Object.values(row).slice(1).every((val) => val !== "")
     );
   };
 
   const handleSubmit = async () => {
     if (!validateForm()) {
-      alert("⚠️ Please fill all ratings before submitting.");
+      setModalMessage("⚠️ Please fill all ratings before submitting.");
+      setSubmitted(true);
       return;
     }
 
     try {
       const formData = new URLSearchParams();
-
       formData.append("name", rows.map((r) => r.name).join(","));
       formData.append("capacity", rows.map((r) => r.capacity).join(","));
       formData.append("method", rows.map((r) => r.method).join(","));
@@ -98,18 +95,20 @@ export default function EvaluationApp() {
           method: "POST",
           mode: "no-cors",
           body: formData,
-        },
+        }
       );
 
+      setModalMessage("🎉 Your evaluation has been submitted successfully!");
       setSubmitted(true);
 
-      // Refresh the page after 3 seconds
       setTimeout(() => {
+        setSubmitted(false);
         window.location.reload();
-      }, 1500);
+      }, 3000);
     } catch (error) {
       console.error(error);
-      alert("❌ Submission failed");
+      setModalMessage("❌ Submission failed. Please try again.");
+      setSubmitted(true);
     }
   };
 
@@ -137,7 +136,6 @@ export default function EvaluationApp() {
             {rows.map((row, i) => (
               <tr key={i}>
                 <td>{row.name}</td>
-
                 {Object.keys(initialRow).map((field) => (
                   <td key={field}>
                     <select
@@ -154,7 +152,6 @@ export default function EvaluationApp() {
                     </select>
                   </td>
                 ))}
-
                 <td>{getTotal(row)}</td>
                 <td>{getAverage(row)}</td>
               </tr>
@@ -162,19 +159,18 @@ export default function EvaluationApp() {
           </tbody>
         </table>
 
-        <div style={{ textAlign: "center" }}>
+        <div style={{ textAlign: "center", marginTop: "15px" }}>
           <button className="btn" onClick={handleSubmit}>
             Submit
           </button>
         </div>
       </div>
 
-      {/* Thank You Modal */}
+      {/* Modal */}
       {submitted && (
         <div className="modal-overlay">
           <div className="thankyou card">
-            <h3>🎉 Thank You!</h3>
-            <p>Your evaluation has been submitted successfully.</p>
+            <p>{modalMessage}</p>
             <button className="btn" onClick={() => setSubmitted(false)}>
               Close
             </button>
