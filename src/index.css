@@ -1,21 +1,32 @@
-/* Reset */ 
+@import "tailwindcss";
+@plugin "daisyui";
+
+/* Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
 }
 
-/* Body & Background */
+/* Body & Background (CENTER FIX) */
 body {
   background: linear-gradient(135deg, #e0f7fa, #f9fbe7);
   min-height: 100vh;
   color: #333;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Container */
 .container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
   padding: 20px;
+  overflow-x: auto;
 }
 
 /* Glass Card */
@@ -24,16 +35,21 @@ body {
   backdrop-filter: blur(20px);
   border-radius: 20px;
   padding: 25px;
+
+  width: 100%;
   max-width: 1200px;
-  margin: auto;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+  margin: 0 auto;
+
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
   animation: fadeIn 0.6s ease-in-out;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
 /* Title */
@@ -46,16 +62,28 @@ h2 {
   font-weight: 600;
 }
 
-/* Table */
+textarea {
+  width: 100%;
+  height: 38px; /* ✅ perfect compact height */
+  padding: 6px 8px;
+  font-size: 13px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  resize: none; /* ❌ no resizing */
+  box-sizing: border-box;
+  overflow: hidden; /* ✅ hides scrollbars */
+}
+/* Table (CLEAN VERSION) */
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  margin: 20px auto;
   min-width: 900px;
-  background: rgba(255, 255, 255, 0.9);
+
+  background: #ffffff;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.05);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
 }
 
 /* Header */
@@ -64,23 +92,34 @@ th {
   color: #222;
   padding: 14px;
   font-weight: 600;
-  text-transform: uppercase;
   font-size: 14px;
   letter-spacing: 0.5px;
 }
 
 /* Cells */
 td {
-  padding: 12px;
+  padding: 10px;
   text-align: center;
-  border-bottom: 1px solid rgba(0,0,0,0.05);
+  border-bottom: 1px solid #e0e0e0;
   font-size: 13px;
-  transition: background 0.3s ease;
+}
+
+/* Name column styling */
+td:first-child,
+th:first-child {
+  text-align: left; /* left align */
+  font-weight: 600; /* bold */
+  white-space: nowrap; /* no wrapping */
+}
+
+/* Remove row background */
+table tbody tr {
+  background: transparent;
 }
 
 /* Row Hover */
 tr:hover {
-  background: rgba(161,196,253,0.2);
+  background: rgba(161, 196, 253, 0.2);
 }
 
 /* Select Dropdown */
@@ -96,16 +135,37 @@ select {
   color: #333;
 }
 
-/* Rating colors (light professional pastels) */
-select option[value="0"] { background-color: #ffe5e5; color: #333; }
-select option[value="1"] { background-color: #fff0e5; color: #333; }
-select option[value="2"] { background-color: #fff7e6; color: #333; }
-select option[value="3"] { background-color: #ffffea; color: #333; }
-select option[value="4"] { background-color: #e6ffe6; color: #333; }
-select option[value="5"] { background-color: #ccffcc; color: #333; }
+/* Rating colors */
+select option[value="0"] {
+  background-color: #ffe5e5;
+}
+select option[value="1"] {
+  background-color: #fff0e5;
+}
+select option[value="2"] {
+  background-color: #fff7e6;
+}
+select option[value="3"] {
+  background-color: #ffffea;
+}
+select option[value="4"] {
+  background-color: #e6ffe6;
+}
+select option[value="5"] {
+  background-color: #ccffcc;
+}
 
 select:hover {
   transform: scale(1.05);
+}
+
+/* Input fields (Positive/Negative) */
+input {
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 100%;
+  outline: none;
 }
 
 /* Button */
@@ -119,74 +179,98 @@ select:hover {
   font-size: 16px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 5px 15px rgba(66,165,245,0.4);
+  box-shadow: 0 5px 15px rgba(66, 165, 245, 0.4);
 }
 
 .btn:hover {
   transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 8px 20px rgba(66,165,245,0.6);
+  box-shadow: 0 8px 20px rgba(66, 165, 245, 0.6);
 }
 
-/* Thank You Modal */
-.thankyou {
-  text-align: center;
-  padding: 60px 30px;
-  color: #222;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 20px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-  animation: popUp 0.6s ease;
-}
-
-.thankyou h3 {
-  font-size: 28px;
-  margin-bottom: 12px;
-  color: #42a5f5;
-}
-
-.thankyou p {
-  font-size: 18px;
-  opacity: 0.9;
-}
-
-/* Modal Overlay */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.25);
+  background: rgba(0, 0, 0, 0.4); /* darker overlay */
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   z-index: 1000;
 }
 
-/* Fade-out animation */
-@keyframes fadeOut {
-  from { opacity: 1; transform: scale(1); }
-  to { opacity: 0; transform: scale(0.8); }
+.thankyou {
+  width: 400px; /* ✅ smaller width */
+  max-width: 90%; /* ✅ responsive */
+  padding: 25px;
+  border-radius: 16px;
+  text-align: center;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.25s ease-in-out;
 }
 
-/* Fade-in animation */
+.thankyou p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.thankyou .btn {
+  width: 100%; /* ✅ full width button */
+}
+
+/* Smooth animation */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
-/* Pop-up animation */
+/* Active cell */
+.active-cell {
+  background-color: #ffe082 !important;
+}
+
+/* Active row */
+.active-row {
+  background-color: #e3f2fd;
+}
+
+/* Active column */
+.active-col {
+  background-color: #f1f8e9;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes popUp {
-  from { transform: scale(0.7); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
-/* Modal fade-out state */
-.modal-overlay.fade-out .thankyou {
-  animation: fadeOut 0.5s ease forwards;
-}
-
-/* ================= Mobile Responsiveness ================= */
+/* Mobile */
 @media (max-width: 768px) {
   .card {
     padding: 15px;
@@ -197,7 +281,8 @@ select:hover {
     font-size: 12px;
   }
 
-  th, td {
+  th,
+  td {
     padding: 8px;
     font-size: 12px;
   }
@@ -214,12 +299,50 @@ select:hover {
   .thankyou {
     padding: 40px 20px;
   }
+}
 
-  .thankyou h3 {
-    font-size: 24px;
+
+.cool-title {
+  font-size: 26px;
+  font-weight: 700;
+  text-align: center;
+  color: #2c3e50;
+  letter-spacing: 1px;
+
+  animation: fadeSlideIn 0.8s ease forwards;
+  position: relative;
+}
+
+/* Subtle underline animation */
+.cool-title::after {
+  content: "";
+  display: block;
+  width: 0%;
+  height: 3px;
+  margin: 8px auto 0;
+  background: linear-gradient(90deg, #4facfe, #00f2fe);
+  border-radius: 2px;
+  animation: underlineGrow 1s ease forwards;
+}
+
+/* Entrance animation */
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-  .thankyou p {
-    font-size: 16px;
+/* Underline animation */
+@keyframes underlineGrow {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 60%;
   }
 }
