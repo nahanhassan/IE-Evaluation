@@ -101,7 +101,7 @@ export default function EvaluationApp() {
       formData.append("negative", rows.map((r) => r.negative).join(","));
 
       await fetch(
-        "https://script.google.com/macros/s/AKfycbyam7S7V1uT9HzXpUsrpjMAq-vGFBTsEB58rTMsOTHwlKbi_REWU4d3pPi9uz89cuLo/exec",
+        "https://script.google.com/macros/s/AKfycbyTXB-rIWhQ6NIcvgarsArnozgXXkr3dDY1IR5GasTtRGbnq-wllttdp6mT5NAcVqBkDw/exec",
         {
           method: "POST",
           mode: "no-cors",
